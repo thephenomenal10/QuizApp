@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quizapp/Services/databaseService.dart';
 import 'package:quizapp/widget/widget.dart';
 
+import '../MyAppBar.dart';
+
 class AddQuestion extends StatefulWidget {
 
     final String quizId;
@@ -60,15 +62,9 @@ class _AddQuestionState extends State<AddQuestion> {
     Widget build(BuildContext context) {
         return Scaffold(
             backgroundColor: Colors.white,
-            appBar: AppBar(
-                leading: BackButton(
-                    color: Colors.black54,
-                ),
-                title: AppLogo(),
-                brightness: Brightness.light,
-                elevation: 0.0,
-                backgroundColor: Colors.transparent,
-                //brightness: Brightness.li,
+            appBar: PreferredSize(
+                child: MyAppBar(),
+                preferredSize: Size.fromHeight(60.0),
             ),
             body: isLoading
                 ? Container(

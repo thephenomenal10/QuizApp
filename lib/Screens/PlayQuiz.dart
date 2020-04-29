@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:quizapp/Model/QuestionModel.dart';
+import 'package:quizapp/Screens/Result.dart';
 import 'package:quizapp/Services/databaseService.dart';
 import 'package:quizapp/widget/widget.dart';
 import 'package:quizapp/Widgets/PlayQuizWidget.dart';
+
+import '../MyAppBar.dart';
 
 class QuizPlay extends StatefulWidget {
     final String quizId;
@@ -88,12 +91,9 @@ class _QuizPlayState extends State<QuizPlay> {
     @override
     Widget build(BuildContext context) {
         return Scaffold(
-            appBar: AppBar(
-                title: AppLogo(),
-                centerTitle: true,
-                backgroundColor: Colors.transparent,
-                brightness: Brightness.light,
-                elevation: 0.0,
+            appBar: PreferredSize(
+                child: MyAppBar(),
+                preferredSize: Size.fromHeight(60.0),
             ),
             body: isLoading
                 ? Container(
@@ -127,6 +127,16 @@ class _QuizPlayState extends State<QuizPlay> {
                         ],
                     ),
                 ),
+            ),
+            floatingActionButton: FloatingActionButton(
+                child: Icon(Icons.check),
+                onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> Results(
+                        correct: _correct,
+                        incorrect: _incorrect,
+                        total: total,
+                    )));
+                },
             ),
         );
     }
